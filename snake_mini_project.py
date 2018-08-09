@@ -23,13 +23,27 @@ START_LENGTH = 6
 box = turtle.clone()
 box.pensize(5)
 box.penup()
-box.goto(410,-270)
+box.goto(433,-293)
 box.pendown()
-box.goto(410,270)
-box.goto(-410,270)
-box.goto(-410,-270)
-box.goto(410,-270)
+box.goto(433,293)
+box.goto(-433,293)
+box.goto(-433,-293)
+box.goto(433,-293)
 box.hideturtle()
+fastsnake = 0
+Title = turtle.Turtle()
+Title.penup()
+Title.goto(0,300)
+Title.write('Judeh dabs in Spanish', move = True, align = "center", font=("Arial", 32, "normal"))
+Title.hideturtle()
+scoreT = turtle.Turtle()
+score = 0
+
+scoreT.penup()
+scoreT.goto(0,-400)
+scoreT.hideturtle()
+
+
 
 #Initialize lists
 pos_list = []
@@ -76,7 +90,8 @@ UP_ARROW = "Up" #Make sure you pay attention to upper and lower
 LEFT_ARROW = "Left" #Pay attention to upper and lower case
 DOWN_ARROW = "Down" #Pay attention to upper and lower case
 RIGHT_ARROW = "Right" #Pay attention to upper and lower case
-TIME_STEP = 100 #Update snake position after this many 
+
+TIME_STEP = 150 #Update snake position after this many 
                 #milliseconds
 SPACEBAR = "space" # Careful, it's not supposed to be capitalized!
 
@@ -91,10 +106,10 @@ RIGHT = 3
 #####WRITE YOUR CODE HERE!!
 
 direction = UP
-UP_EDGE = 250
-DOWN_EDGE = -250
-RIGHT_EDGE = 400
-LEFT_EDGE = -400
+UP_EDGE = 275
+DOWN_EDGE = -275
+RIGHT_EDGE = 420
+LEFT_EDGE = -420
 
 def up():
     global direction #snake direction is global (same everywhere)
@@ -187,7 +202,7 @@ def move_snake():
 
 #    #Stamp new element and append new stamp in list
 #    #Remember: The snake position changed - update my_pos()
-    global food_stamps, food_pos, pos_list
+    global food_stamps, food_pos, pos_list, score, TIME_STEP, fastsnake
     if snake.pos() in food_pos:
         food_ind=food_pos.index(snake.pos()) #What does this do?
         food.clearstamp(food_stamps[food_ind])
@@ -195,10 +210,17 @@ def move_snake():
         food_stamps.pop(food_ind) #Remove eaten food stamp
         print("You have eaten the food!")
         make_food()
+        score += 1
+        scoreT.goto(0,-400)
+        scoreT.clear()
+        scoreT.write('score ' + str(score), move = True, align = 'center', font=("Arial", 20, "normal"))
+        fastsnake += 2
     else:
         old_stamp=stamp_list.pop(0)
         snake.clearstamp(old_stamp)
         pos_list.pop(0)
+        
+        
 
 
   
@@ -220,7 +242,7 @@ def move_snake():
     stamp_list.append(new_stamp)
     
    
-    turtle.ontimer(move_snake,TIME_STEP)
+    turtle.ontimer(move_snake,TIME_STEP - fastsnake)
 
 move_snake()    
 
@@ -268,6 +290,8 @@ for this_food_pos in food_pos:
     food.goto(this_food_pos)
     food_stamp_id = food.stamp()
     food_stamps.append(food_stamp_id)
+
+    
     
 
 
