@@ -3,7 +3,9 @@
 Created on Sun Jul  1 23:58:42 2018
 
 Snake Mini project Starter Code
-Name: Judeh A
+N
+ame: Judeh A
+
 Date:
 """
 import turtle
@@ -13,12 +15,21 @@ turtle.tracer(1,0) #This helps the turtle move more smoothly
 
 SIZE_X=800
 SIZE_Y=500
-turtle.setup(SIZE_X, SIZE_Y) #Curious? It's the turtle window  
-                             #size. 
+turtle.setup(1000,1000) #Curious? It's the turtle window                               #size. 
 turtle.penup()
 
 SQUARE_SIZE = 20
 START_LENGTH = 6
+box = turtle.clone()
+box.pensize(5)
+box.penup()
+box.goto(410,-270)
+box.pendown()
+box.goto(410,270)
+box.goto(-410,270)
+box.goto(-410,-270)
+box.goto(410,-270)
+box.hideturtle()
 
 #Initialize lists
 pos_list = []
